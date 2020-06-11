@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 
 app.secret_key = "supersecret"
 
@@ -13,7 +16,9 @@ def index():
 		post = request.form.get('post')
 		create_post(name, post)
 
-	return render_template('index.html')
+	posts = get_posts()
+
+	return render_template('index.html', posts=posts)
 
 if __name__ == "__main__":
 	app.run(debug=True, port=5000, host='0.0.0.0')
