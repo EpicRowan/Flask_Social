@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_cors import CORS
+from model import create_posts, get_posts
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ def index():
 	if request.method == 'POST':
 		name = request.form.get('name')
 		post = request.form.get('post')
-		create_post(name, post)
+		create_posts(name, post)
 
 	posts = get_posts()
 
